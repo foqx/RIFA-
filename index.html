@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>RIFA — Smart Medicine Dispensing</title>
+  <meta name="description" content="RIFA interactive presentation — the future of smart medicine dispensing, from prescription to patient.">
+  <meta name="theme-color" content="#0A1B33">
+  <link rel="icon" type="image/png" href="assets/generated/rifa-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="src/styles/main.css">
+  <script src="src/config.js"></script>
+  <script type="module" src="src/main.js"></script>
+</head>
+<body>
+  <a class="skip" href="#slides">Skip to presentation</a>
+
+
+  <!-- Fixed 1920×1080 stage; background in RIFA brand colours (see main.css) -->
+  <main id="stage" aria-roledescription="presentation" aria-label="RIFA presentation">
+    <!-- Living background: drifting teal light, perspective grid floor, capsule particles (canvas
+         injected by AmbientBackground), pointer spotlight and vignette. -->
+    <div class="stage-bg" aria-hidden="true">
+      <span class="aurora a1"></span><span class="aurora a2"></span><span class="aurora a3"></span>
+      <span class="grid-floor"></span>
+      <span class="spotlight"></span>
+      <span class="vignette"></span>
+    </div>
+    <!-- Top bar: compact control group -->
+    <div id="utils" class="utils" role="toolbar"></div>
+    <div id="slides" class="slides"></div>
+    <!-- Bottom dock: prev · section tabs · counter · next -->
+    <nav id="dock" class="dock">
+      <button type="button" class="dock-btn" data-act="prev"></button>
+      <div id="tabbar" class="tabbar"></div>
+      <span class="dock-count" aria-hidden="true"></span>
+      <button type="button" class="dock-btn dock-btn-next" data-act="next"></button>
+    </nav>
+  </main>
+
+  <!-- RIFA AI Assistant launcher (one control for every screen size) -->
+  <!-- RIFA AI Assistant launcher: small dark-glass circle with the RIFA "R" mark (official
+       dark-background colours); the assistant's name is the accessible name + hover tooltip. -->
+  <button type="button" id="askFab" class="ask-fab">
+    <img class="ask-logo" src="assets/generated/rifa-mark-white.png" alt="" width="430" height="500">
+  </button>
+
+  <!-- Opening brand reveal (once per session, skippable, skipped under reduced motion) -->
+  <div id="splash" aria-hidden="true">
+    <div class="splash-inner">
+      <img src="assets/generated/rifa-logo-white.png" alt="" width="920" height="860">
+      <span class="splash-line"></span>
+    </div>
+  </div>
+
+  <section id="assistant" class="chat" hidden></section>
+  <div id="overlays"></div>
+  <div id="live" class="sr" aria-live="polite" aria-atomic="true"></div>
+
+  <noscript><p class="noscript">This interactive presentation needs JavaScript enabled.</p></noscript>
+  <div id="boot-error" class="boot-error" role="alert" hidden>
+    <p><b>The presentation could not start.</b> Serve the folder over HTTP (e.g. <code>py -m http.server 5173</code>) and open <code>http://localhost:5173</code> — ES modules do not load from <code>file://</code>.</p>
+  </div>
+  <script>
+    // file:// cannot load ES modules — show a clear message instead of a blank page.
+    if (location.protocol === 'file:') document.getElementById('boot-error').hidden = false;
+  </script>
+</body>
+</html>
